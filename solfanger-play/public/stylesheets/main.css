@@ -1,0 +1,18 @@
+#graph {
+  height: 400px; 
+  width : 80%;
+}
+#left-content {
+  position : absolute;
+  left : 0;
+  width : 150px;
+  margin-left : 10px;
+  margin-top : 20px;
+  color : #000000;
+  padding : 3px;
+}
+#top {
+  top : 0px;
+  padding : 3px;
+  color : #000000;
+}

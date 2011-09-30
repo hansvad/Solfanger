@@ -1,0 +1,30 @@
+#{extends 'main.html' /}
+#{set title:'Solfanger' /}
+#{set 'moreScripts'}
+  #{script 'highcharts.js' /}
+  #{script 'live.js' /}
+#{/set}
+
+<table>
+		<tr>
+	<td>
+	<div id="leftcontent">
+		<b>Akkurat n&aring;:</b><br/>
+	</div>
+	</td><td>
+	<div id="graph" style="width: 80%; height: 400px ;align:right"></div>
+	</td>
+	</tr>
+</table>
+<script type="text/javascript">	
+$.getJSON("livetemp", function(data){
+	$("#leftcontent").append('Temp solfanger ' +data.t1 + '<br/>');
+	$("#leftcontent").append('Temp tank ' +data.t3 + '<br/>');
+	$("#leftcontent").append('Energi produsert ' +data.energi + '<br/>');
+	$("#leftcontent").append('Pumpe tank ' +data.p1 + '<br/>');
+	$("#leftcontent").append('Pumpe gulvvarme ' +data.p2 + '<br/>');
+	}
+);
+
+</script>
+
