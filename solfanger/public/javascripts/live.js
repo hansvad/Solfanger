@@ -14,10 +14,8 @@ $(document).ready(function() {
 			   },
 		   chart: {
 		         renderTo: 'graph',
-		         defaultSeriesType: 'line',
-		         zoomType: 'x',
-		         marginRight: 130,
-		         marginBottom: 25
+		         defaultSeriesType: 'spline',
+		         zoomType: 'x'
 		      },
 		      title: {
 		         text: 'Temperatur i solfanger',
@@ -29,18 +27,22 @@ $(document).ready(function() {
 		      },
 		      xAxis: {
 		    	     type: 'datetime',
+		    	     dateTimeLabelFormats: {
+		    	    		second: '%H:%M:%S',
+		    	    		minute: '%e. %H:%M',
+		    	    		hour: '%e. %b %H:%M',
+		    	    		day: '%e. %b',
+		    	    		week: '%e. %b',
+		    	    		month: '%b \'%y',
+		    	    		year: '%Y'
+		    	    	},
 		    	     maxZoom: 3 * 60 * 60 * 1000 
 		    	    
 		      },
 		      yAxis: {
 		         title: {
 		            text: 'Temperatur (°C)'
-		         },
-		         plotLines: [{
-		            value: 0,
-		            width: 1,
-		            color: '#808080'
-		         }]
+		         }
 		      },
 		      tooltip: {
 		         formatter: function() {
@@ -56,6 +58,25 @@ $(document).ready(function() {
 		         y: 100,
 		         borderWidth: 0
 		      },
+		      plotOptions: {
+		          spline: {
+		             marker: {
+		                enabled: false,
+		                states: {
+		                   hover: {
+		                      enabled: true,
+		                      radius: 5
+		                   }
+		                }
+		             },
+		             shadow: true,
+		             states: {
+		                hover: {
+		                   lineWidth: 2                  
+		                }
+		             }
+		          }
+		       },
       series: [{
          name: 'Temp tak'
         	 

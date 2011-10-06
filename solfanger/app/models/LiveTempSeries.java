@@ -3,6 +3,10 @@ package models;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import play.modules.mongo.MongoEntity;
+import play.modules.mongo.MongoModel;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,15 +14,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-public class LiveTempSeries   {
+@MongoEntity("livetemp")
+public class LiveTempSeries extends MongoModel  {
 	private static final int size= 2016;
-	private FixedList<Object[]> t1= new FixedList<Object[]>(size);
-	private FixedList<Object[]> t3= new FixedList<Object[]>(size);
+//	public List<Temp> list= new FixedList<Temp>(size);
+	public Map<Long, Temp> map= new FixedMap<Long,Temp>(size);
 	
 	public void add(Temp temp){
 		Long timePoint= temp.time.getTime();
-		t1.add(new Object[]{timePoint,temp.t1});
-		t3.add(new Object[]{timePoint,temp.t3});
+		map.put(timePoint, temp);
+//		list.add(temp);
 	}
 	
 	public String toJson(){

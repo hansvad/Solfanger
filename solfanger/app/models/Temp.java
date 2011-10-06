@@ -6,8 +6,7 @@ import play.db.jpa.*;
 import javax.persistence.*;
 import java.util.*;
 
-//@Entity
-public class Temp extends Model {
+public class Temp {
 	
 	public Date time;
 	public double t1;

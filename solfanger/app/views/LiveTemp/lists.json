@@ -1,0 +1,12 @@
+
+{"t1":[
+  #{list items:series.map, as:'temp'} 
+    [${temp.key}, ${temp.value.t1}]${temp_isLast ? '' : ',' }
+  #{/list} 
+],
+"t3":[
+  #{list items:series.map, as:'temp'} 
+    [${temp.key}, ${temp.value.t3} ]${temp_isLast ? '' : ',' }
+  #{/list} 
+  
+]}
