@@ -9,6 +9,7 @@ GET     /test                                   Application.test
 PUT     /livetemp								LiveTemp.register
 GET     /livetemp								LiveTemp.now
 GET     /livetemp/lists							LiveTemp.lists
+POST     /livetemp/lists						LiveTemp.saveBatch
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

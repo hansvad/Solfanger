@@ -1,8 +1,13 @@
 package controllers;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 
 import models.LiveTempSeries;
 import models.Temp;
@@ -27,11 +32,27 @@ public class LiveTemp extends Controller {
 		series.save();
 	}
 
-	public static void saveBatch(){
-		
+	public static void saveBatch() {
+		try {
+			LiveTempSeries series = getLiveTempSeries();
+			BufferedReader body = new BufferedReader(new InputStreamReader(
+					request.body));
+			String line;
+
+			while ((line = body.readLine()) != null) {
+				String[] data = line.split(";");
+				if (data.length == 21) {
+					Temp temp = Temp.generate(data);
+					series.add(temp);
+				}
+			}
+			series.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
-	
-	
+
 	private static LiveTempSeries getLiveTempSeries() {
 		if (LiveTempSeries.count() == 0) {
 			System.out.println("creating new");
