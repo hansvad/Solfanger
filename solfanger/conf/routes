@@ -4,12 +4,14 @@
 
 # Home page
 GET     /                                       Application.index
-GET     /test                                   Application.test
+GET     /temp                                   Application.temp
+GET     /test                                   Application.temp
+GET     /history                                Application.history
 
 PUT     /livetemp								LiveTemp.register
 GET     /livetemp								LiveTemp.now
 GET     /livetemp/lists							LiveTemp.lists
-POST     /livetemp/lists						LiveTemp.saveBatch
+POST    /livetemp/lists						LiveTemp.saveBatch
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
