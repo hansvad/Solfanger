@@ -11,7 +11,10 @@ GET     /history                                Application.history
 PUT     /livetemp								LiveTemp.register
 GET     /livetemp								LiveTemp.now
 GET     /livetemp/lists							LiveTemp.lists
-POST    /livetemp/lists						LiveTemp.saveBatch
+POST    /livetemp/lists							LiveTemp.saveBatch
+
+GET     /history/lists							History.lists
+POST    /history/lists							History.saveBatch
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

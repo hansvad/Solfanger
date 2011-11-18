@@ -16,6 +16,10 @@ public class Temp {
 	public double t2;
 	public double t3;
 	public double t4;
+	public boolean p1;
+	public boolean p2;
+	public double time_p1;
+	public double time_p2;
 	public double energi;
 
 	@Override
@@ -32,8 +36,17 @@ public class Temp {
 		temp.t2 = extractDouble(data[2]);
 		temp.t3 = extractDouble(data[3]);
 		temp.t4 = extractDouble(data[4]);
+		temp.p1 = extractProsent(data[5]);
+		temp.p2 = extractProsent(data[6]);
+		temp.time_p1 = extractDouble(data[7]);
+		temp.time_p2 = extractDouble(data[8]);
+		temp.energi=Math.round(extractDouble(data[18])/1000);
 		
 		return temp;
+	}
+
+	private static boolean extractProsent(String prosent) {
+		return ("100".equals(prosent));
 	}
 
 	public static Date extractDate(String time) {

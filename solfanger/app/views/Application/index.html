@@ -5,23 +5,24 @@
 
 #{tabs tab:1 /}
 
-Live data
-<ul id="live"/>
+<div id="content">
+</div>
 
-<script type="text/javascript">
- 	
+<script type="text/javascript">	
 $.getJSON("livetemp", function(data){
- var items = [];
-
-  $.each(data, function(key, val) {
-    items.push('<li id="' + key + '">'+key +': ' + val + '</li>');
-  });
-
-  $('<ul/>', {
-    'class': 'my-new-list',
-    html: items.join('')
-  }).appendTo('body');
-});
+	$("#content").append('Oppdatert ' +data.time + '<br/>');
+	$("#content").append('Temp i solfanger ' +data.t1 + '<br/>');
+	$("#content").append('Temp bunn av tank ' +data.t2 + '<br/>');
+	$("#content").append('Temp toppen av tank ' +data.t3 + '<br/>');
+	if (data.p1){
+		$("#content").append('Temp retur fra tak ' +data.t4 + '<br/>');
+	}
+	$("#content").append('Pumpe tank ' +(data.p1? 'kj&oslash;rer' : 'stoppet') + '<br/>');
+	$("#content").append('Pumpe gulvvarme ' +(data.p2? 'kj&oslash;rer' : 'stoppet') + '<br/>');
+	$("#content").append('Energi produsert siden 1. sept ' +data.energi + ' kWh<br/>');
+	}
+);
 
 </script>
+
 

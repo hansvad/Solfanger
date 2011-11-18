@@ -1,11 +1,11 @@
 #{extends 'main.html' /}
 #{set title:'Solfanger' /}
 #{set 'moreScripts'}
-  #{script 'highcharts.js' /}
-  #{script 'live.js' /}
+  #{script 'highstock.js' /}
+  #{script 'history.js' /}
 #{/set}
 #{tabs tab:3 /}
 
-<div>
-Historiske data
+<div id="content">
+<div id="container" style="width: 100%; height: 400px ;align:right"></div>
 </div>

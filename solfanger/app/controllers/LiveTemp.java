@@ -15,20 +15,23 @@ import models.TempStrings;
 
 import com.google.gson.Gson;
 
+import play.cache.Cache;
 import play.mvc.Controller;
 
 public class LiveTemp extends Controller {
-	private static String liveData = null;
+	private static final String LIVE_CACHE = "liveSeries";
+	private static Temp latest = null;
 
 	public static void register(String data) {
 		if (data == null || data.isEmpty()) {
 			return;
 		}
-		liveData = data;
 		Gson gson = new Gson();
 		Temp temp = gson.fromJson(data, TempStrings.class).getTemp();
+		latest= temp;
 		LiveTempSeries series = getLiveTempSeries();
 		series.add(temp);
+		Cache.set(LIVE_CACHE, series);
 		series.save();
 	}
 
@@ -38,6 +41,7 @@ public class LiveTemp extends Controller {
 			BufferedReader body = new BufferedReader(new InputStreamReader(
 					request.body));
 			String line;
+			int lines=0;
 
 			while ((line = body.readLine()) != null) {
 				String[] data = line.split(";");
@@ -45,8 +49,11 @@ public class LiveTemp extends Controller {
 					Temp temp = Temp.generate(data);
 					series.add(temp);
 				}
+				lines++;
 			}
+			Cache.set(LIVE_CACHE, series);
 			series.save();
+			System.out.println("Livetemp saved " + lines);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -54,21 +61,21 @@ public class LiveTemp extends Controller {
 	}
 
 	private static LiveTempSeries getLiveTempSeries() {
+		LiveTempSeries series= Cache.get(LIVE_CACHE, LiveTempSeries.class);
+		if (series!=null){
+			System.out.println(series.map.size());
+			return series;
+		}
 		if (LiveTempSeries.count() == 0) {
-			System.out.println("creating new");
 			return new LiveTempSeries();
 		}
-		LiveTempSeries series = LiveTempSeries.find().first();
-		System.out.println("found series: " + series.get_id() + " size: "
-				+ series.map.size());
+		series = LiveTempSeries.find().first();
+		Cache.set(LIVE_CACHE, series);
 		return series;
 	}
 
 	public static void now() {
-		if (liveData == null) {
-			return;
-		}
-		renderJSON(liveData);
+		renderJSON(latest);
 	}
 
 	public static void lists() {

@@ -12,6 +12,8 @@ public class TempStrings {
 	public String t2;
 	public String t3;
 	public String t4;
+	public String p1;
+	public String p2;
 	public String energi;
 	
 	public Temp getTemp(){
@@ -22,9 +24,15 @@ public class TempStrings {
 		temp.t3=extractDouble(t3);
 		temp.t4=extractDouble(t4);
 		temp.time=getDate(time);
+		temp.p1=getBoolean(p1);
+		temp.p2=getBoolean(p2);
 		return temp;
 	}
 	
+	private boolean getBoolean(String prosent) {
+		return ("100 %".equals(prosent));
+	}
+
 	private Date getDate(String time) {
 		//Fri Sep 23 20:30:17 +0200 2011
 		String modifiedTime=time.replaceFirst("^\\w{3}\\s", "");

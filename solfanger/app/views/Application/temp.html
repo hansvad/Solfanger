@@ -5,26 +5,6 @@
   #{script 'live.js' /}
 #{/set}
 #{tabs tab:2 /}
-<table>
-		<tr>
-	<td>
-	<div id="leftcontent">
-		<b>Akkurat n&aring;:</b><br/>
-	</div>
-	</td><td>
-	<div id="graph" style="width: 80%; height: 400px ;align:right"></div>
-	</td>
-	</tr>
-</table>
-<script type="text/javascript">	
-$.getJSON("livetemp", function(data){
-	$("#leftcontent").append('Temp solfanger ' +data.t1 + '<br/>');
-	$("#leftcontent").append('Temp tank ' +data.t3 + '<br/>');
-	$("#leftcontent").append('Energi produsert ' +data.energi + '<br/>');
-	$("#leftcontent").append('Pumpe tank ' +data.p1 + '<br/>');
-	$("#leftcontent").append('Pumpe gulvvarme ' +data.p2 + '<br/>');
-	}
-);
-
-</script>
-
+<div id="content">
+	<div id="graph" style="width: 100%; height: 400px ;align:right"></div>
+</div>

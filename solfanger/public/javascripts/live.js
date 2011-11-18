@@ -22,7 +22,7 @@ $(document).ready(function() {
 		         x: -20 //center
 		      },
 		      subtitle: {
-		         text: '',
+		         text: 'Klikk og dra for å zoome',
 		         x: -20
 		      },
 		      xAxis: {
