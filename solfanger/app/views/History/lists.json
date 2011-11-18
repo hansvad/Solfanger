@@ -1,0 +1,34 @@
+%{ def last_p1=0;
+	def last_p2=0;
+	def last_e=0;
+ }%
+{"time_p1":[  
+  #{list items:series.map, as:'temp'} 
+  	%{ def time_p1=temp.value.time_p1 -last_p1;
+   	last_p1=temp.value.time_p1;
+   	}%
+    [${temp.key}, ${time_p1}]${temp_isLast ? '' : ',' }
+  #{/list} 
+],
+"time_p2":[  
+  #{list items:series.map, as:'temp'} 
+  	%{ def time_p2=temp.value.time_p2 -last_p2;
+   	last_p2=temp.value.time_p2;
+   	}%
+    [${temp.key}, ${time_p2}]${temp_isLast ? '' : ',' }
+  #{/list} 
+],
+"energi":[  
+  #{list items:series.map, as:'temp'} 
+  	%{ def energi=temp.value.energi -last_e;
+   	last_e=temp.value.energi;
+   	}%
+    [${temp.key}, ${energi}]${temp_isLast ? '' : ',' }
+  #{/list} 
+],
+"t3":[
+  #{list items:series.map, as:'temp'} 
+    [${temp.key}, ${temp.value.t3} ]${temp_isLast ? '' : ',' }
+  #{/list} 
+  
+]}
