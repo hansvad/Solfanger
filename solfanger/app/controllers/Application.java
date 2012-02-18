@@ -10,14 +10,17 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
-        render();
+    	response.cacheFor("10mn");
+    	render();
     }
     
     public static void temp() {
+    	response.cacheFor("10mn");
         render();
     }
     
     public static void history() {
+    	response.cacheFor("1h");
         render();
     }
 

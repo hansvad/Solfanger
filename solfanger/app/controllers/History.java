@@ -72,6 +72,7 @@ public class History extends Controller {
 	}
 
 	public static void lists() {
+		response.cacheFor("5h");
 		HistoryTempSeries series = getHistory();
 		render(series);
 	}

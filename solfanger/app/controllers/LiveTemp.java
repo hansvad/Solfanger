@@ -80,6 +80,7 @@ public class LiveTemp extends Controller {
 
 	public static void lists() {
 		LiveTempSeries series = getLiveTempSeries();
+		response.cacheFor("10mn");
 		render(series);
 	}
 
